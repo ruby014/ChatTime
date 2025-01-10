@@ -2,17 +2,18 @@ from flask import Flask,render_template,request
 from flask_socketio import SocketIO, emit
 import random
 
+# create Flask app to use it 
 app = Flask(__name__)
 socketio = SocketIO(app)
 
-# python dict. Store connected users. Key is socketid, value is username and avatarUrl
+# python dict. To keep track of connected users. Key is socketid, value is username and avatarUrl
 users = {}
 
 @app.route('/')
 def index():
         return render_template('index.html')
 
-@socketio.on('connect') # listening for connect event 
+@socketio.on('connect') # listening for the connect event as per the on method 
 def handle_connect():
         username = f"User_{random.randInt(10000,9999)}"
         gender = random.choice(["girl","boy"])
@@ -21,6 +22,7 @@ def handle_connect():
 
         users[request.sid] = { "username":username,"avatar":avatar_url}
 
+        # emit: notifies people in the chat of event that happened e.g. user joined
         emit("user_joined", {"username":username,"avatar":avatar_url},broadcast=True)
 
         emit("set_username", {"username":username})
@@ -40,6 +42,17 @@ def handle_message(data):
               "avatar":user["avatar"],
               "message":data["message"]
         }, broadcast=True)
+
+@socketio.on("update_username")
+def handle_update_username(data):
+    old_username = users[request.sid]["username"]
+    new_username = data["username"]
+    users[request.sid]["username"] = new_username
+
+    emit("username_updated", {
+          "old_username":old_username, 
+          "new_username":new_username
+    }, broadcast=True)
 
 if __name__ == "__main__":
         socketio.run(app); 
