@@ -15,10 +15,10 @@ def index():
 
 @socketio.on('connect') # listening for the connect event as per the on method 
 def handle_connect():
-        username = f"User_{random.randInt(10000,9999)}"
+        username = f"User_{random.randint(1000,9999)}"
         gender = random.choice(["girl","boy"])
         # as per this randomly generated url, profile pic will be different
-        avatar_url = f"https://avatar.iran.liara.run/public/{gender}?username={username}"
+        avatar_url = f" https://avatar.iran.liara.run/public/{gender}?username={username}"
 
         users[request.sid] = { "username":username,"avatar":avatar_url}
 
