@@ -58,4 +58,35 @@ const socket = io(); // get socket instance to enable handling of events to back
                 usernameInput.value = ""; 
             }
         }
-        function addMessage() {}
+        function addMessage(message, type, username="", avatar="") {
+            const messageElement = document.createElement("div"); 
+            messageElement.className = "message";
+
+            if (type === "user") {
+                const isSentMessage = username === currentUsername; 
+                if (isSentMessage) {
+                    messageElement.classList.add("sent"); 
+                }
+                const avatarImg = document.createElement("img"); 
+                avatarImg.src = avatar; 
+                messageElement.appendChild(avatarImg);
+
+                const contentDiv = document.createElement("div");
+                contentDiv.className = "message-content";
+
+                const usernameDiv = document.createElement("div");
+                usernameDiv.className = "message-username";
+                usernameDiv.innerHTML = username;
+                contentDiv.appendChild(usernameDiv);
+
+                const messageText = document.createElement("div");
+                messageText.className = "message";
+                contentDiv.appendChild(messageText);
+
+                messageElement.appendChild(contentDiv);
+
+            } else {
+
+            }
+
+        }
