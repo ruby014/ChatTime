@@ -5,11 +5,12 @@ Chat Time is a user-friendly messaging application designed to enable seamless c
 ## Tech Stack 
 Chat Time is built using modern technologies to deliver an efficient and scalable solution:
 
-Frontend: HTML 
+Frontend:
+- HTML/CSS 
 
 Backend:
 - Python: For handling server-side operations.
 - Flask: For creating the REST API.
 
 Other Tools:
-Socket.io: For real-time communication.
+- Socket.io: For real-time communication.
