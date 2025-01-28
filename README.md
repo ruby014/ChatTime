@@ -9,8 +9,8 @@ Frontend:
 - HTML/CSS 
 
 Backend:
-- Python: For handling server-side operations.
-- Flask: For creating the REST API.
+- Python 
+- Flask
 
 Other Tools:
 - Socket.io: For real-time communication.
